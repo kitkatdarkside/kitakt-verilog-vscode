@@ -1,0 +1,41 @@
+{
+    "name": "kitkat-verilog",
+    "displayName": "Verilog-HDL Language Support",
+    "description": "Syntax Highlight for Verilog-HDL/SystemVerilog",
+    "version": "0.9.1",
+    "publisher": "kitkat",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "bugs": {
+        "url": "--",
+        "email": "kitkatdarkside@gmail.com"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "verilog",
+                "aliases": [
+                    "Verilog-HDL",
+                    "verilog"
+                ],
+                "extensions": [
+                    "v",
+                    "sv",
+                    "vh"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "verilog",
+                "scopeName": "source.verilog",
+                "path": "./syntaxes/verilog.tmLanguage.json"
+            }
+        ]
+    }
+}

@@ -1,0 +1,174 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Verilog-HDL",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+        {
+            "include": "#variables"
+        },
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#case"
+		},
+		{
+			"include": "#strings"
+		},
+        {
+            "include": "#module_instantiations"
+        },
+        {
+            "include": "#directives"
+        }
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+                {
+                    "name": "keyword.control.js",
+                    "match": "\\b(always(_ff|_comb|_latch)?|and|assign|attribute|begin|(case[xz]?)|deassign|default|defparam|disable|edge|else|end(attribute|case|function|generate|interface|module|primitive|specify|table|task)?|event|for|force|forever|fork|function|generate|genvar|if|import|initial|interface|join|localparam|medium|modport|module|large|macromodule|nand|nor|not|notif(01)|or|parameter|primitive|realtime|release|repeat|return|small|specify|specparam|table|task|time|unique|wait|while|wor|xnor|xor)\\b"
+                },
+                {
+                    "name": "storage.type",
+                    "match": "\\b(buf|bufif0|bufif1|cmos|highz(01)|inout|input|int|integer|nmos|output|pmos|pull0|pull1|pulldown|pullup|rcmos|real|reg|rnmos|rpmos|rtran|rtranif(01)|scalared|signed|strength|string|strong0|strong1|supply0|supply1|tran|tranif(01)|tri(01)?|tri(and|or|reg)|unsigned|vectored|wand|weak(01)|wire)\\b"
+                },
+                {
+                    "name": "variable.parameter",
+                    "match": "\\b((pos|neg)edge)\\b"
+                },
+                {
+                    "name": "entity.other.inherited-class",
+                    "match": "\\b(typedef|enum|logic)\\b"
+                },
+                {
+                    "name": "keyword.other.compiler.directive",
+                    "match": "^\\s*`((cell)?define|default_(decay_time|nettype|trireg_strength)|delay_mode_(path|unit|zero)|ifdef|ifndef|include|end(if|celldefine)|else|elsif|(no)?unconnected_drive|resetall|timescale|undef)\\b"
+                },
+                {
+                    "name": "entity.name.function.jp",
+                    "match": "\\$(f(open|close)|readmem(b|h)|timeformat|printtimescale|stop|finish|(s|real)?time|realtobits|bitstoreal|rtoi|itor|(f)?(display|write(h|b))|random|dist_(chi_square|erlang|exponential|normal|poisson|t|uniform)|dump(file|vars|off|on|all|limit|flush)|shm_(open|close|probe)|fsdbDump(vars|file))\\b"
+                },
+                {
+                    "name": "constant.numeric",
+                    "match": "[0-9]*'[bBoOdDhH][a-fA-F0-9_xXzZ]+\\b"
+                },
+                {
+                    "name": "constant.numeric",
+                    "match": "([\\+\\-\\*\\/:\\,\\(\\[\\{=]+)([\\s]*)([0-9]+)",
+                    "captures": {
+                        "1" : {
+                            "name": "force.normal"
+                        },
+                        "3" : {
+                            "name": "constant.numeric"
+                        }
+                    }
+                }
+            ]
+		},
+        "case": {
+            "patterns": [
+                {
+                    "name": "begin_exception",
+                    "match": "(^\\s*)(begin)(\\s*(:))",
+                    "captures": {
+                        "2" : {
+                            "name": "keyword.control.js"
+                        }
+                    }
+                },
+                {
+                    "name": "case.string",
+                    "match": "(^\\s*)([a-zA-Z0-9_]+)(\\s*(:))",
+                    "captures": {
+                        "2" : {
+                            "name": "support.function"
+                        }
+                    }
+                }
+            ]
+        },
+        "strings": {
+			"name": "string.quoted.double.verilog",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.verilog",
+					"match": "\\\\."
+				}
+			]
+		},
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line",
+                    "begin": "//",
+                    "end": "$"
+                },
+                {
+                    "name": "comment.block",
+                    "begin": "/\\*",
+                    "end": "\\*/"
+                }
+            ]
+        },
+        "variables": {
+            "patterns": [
+            ]
+        },
+        "module_instantiations": {
+            "patterns": [
+                {
+                }
+            ]
+        },
+
+        "dot_inst" : {
+            "patterns": [
+                {
+                    "name": "none",
+                    "begin": "\\.",
+                    "end": "\\)"
+                }
+            ]
+        },
+        "inst_params": {
+            "patterns": [
+                {
+                    "name": "string.quoted.double.verilog",
+                    "begin": "#\\(",
+                    "end": "\\)",
+                    "patterns": [
+                        {
+                            "include": "#dot_inst"
+                        }
+                    ]
+
+
+                }
+            ]
+        },
+        "directives": {
+            "patterns": [
+                {
+                    "name": "keyword.other.compiler.directive",
+                    "begin": "^(\b)*\\(\\*",
+                    "end": "\\*\\)",
+                    "patterns": [
+                        {
+                            "include": "#strings"
+                        },
+                        {
+                            "name": "keyword.other.compiler.directive"
+                        }
+                    ]
+                }
+            ]
+        }
+	},
+	"scopeName": "source.verilog"
+}
