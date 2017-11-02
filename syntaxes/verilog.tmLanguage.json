@@ -44,7 +44,7 @@
                     "match": "\\b(typedef|enum|logic)\\b"
                 },
                 {
-                    "name": "keyword.other.compiler.directive",
+                    "name": "constant.language",
                     "match": "^\\s*`((cell)?define|default_(decay_time|nettype|trireg_strength)|delay_mode_(path|unit|zero)|ifdef|ifndef|include|end(if|celldefine)|else|elsif|(no)?unconnected_drive|resetall|timescale|undef)\\b"
                 },
                 {
